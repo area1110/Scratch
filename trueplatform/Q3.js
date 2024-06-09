@@ -11,7 +11,7 @@ function main(query) {
 	];
 
 	// Apply
-	let ds = new DataSearchV03();
+	let ds = new DataSearchV04();
 	ds.init(sources);
 	let result = ds.suggest(query);
 
@@ -95,7 +95,6 @@ class DataSearchV02 {
 }
 
 // ** solution v0.3 **
-
 class DataSearchV03 {
 	source;
 
@@ -140,5 +139,68 @@ class DataSearchV03 {
 		const lowerCaseQuery = query.toLowerCase();
 
 		return Array.from(this.index[lowerCaseQuery]).map((i) => this.source[i]);
+	}
+}
+
+class DataSearchV04 {
+	source;
+
+	trieTree;
+
+	init(source) {
+		this.source = source;
+
+		this.trieTree = new TrieTree();
+
+		for (let i = 0; i < source.length; i++) {
+			let item = source[i];
+			// process for name
+			this.trieTree.insert(item.name.toLowerCase(), i);
+
+			// process for title
+			this.trieTree.insert(item.title.toLowerCase(), i);
+		}
+	}
+
+	/**
+	 * @param {string} query
+	 */
+	suggest(query) {
+		const lowerCaseQuery = query.toLowerCase();
+		// Find index of query in trie tree
+		let node = this.trieTree.root;
+		for (const char of lowerCaseQuery) {
+			if (!node.children[char]) {
+				return [];
+			}
+			node = node.children[char];
+		}
+
+		return Array.from(node.index).map((i) => this.source[i]);
+	}
+}
+
+class TrieNode {
+	children = {};
+	index = [];
+	end = false;
+}
+
+class TrieTree {
+	root = new TrieNode();
+
+	insert(word, location) {
+		let node = this.root;
+		for (let char of word) {
+			if (!node.children[char]) {
+				node.children[char] = new TrieNode();
+			}
+			node = node.children[char];
+
+			if (!node.index.includes(location)) {
+				node.index.push(location);
+			}
+		}
+		node.end = true;
 	}
 }
