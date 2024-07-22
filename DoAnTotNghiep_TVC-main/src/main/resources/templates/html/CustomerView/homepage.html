@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="html/CustomerView/header::head"></head>
+<body>
+	<!--Start of Tawk.to Script-->
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/65ea79e29131ed19d976a6c4/1hoduo7vd';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>
+	<!--End of Tawk.to Script-->
+
+	<!--HEADER-->
+	<div>
+		<div th:replace="html/CustomerView/header::header-temp"></div>
+	</div>
+
+	<!--    Alert Checkout success-->
+	<div th:if="${message!=null}" th:text="${message}"
+		style="margin-top: 150px; margin-bottom: -145px;"
+		class="alert alert-primary" role="alert">
+	</div>
+
+	<div class="container-fluid">
+		<!--slide-->
+		<div class="container">
+			<div style="margin-top: 154px;" class="row slide">
+				<div id="carouselExampleIndicators" class="carousel slide"
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img class="d-block w-100" th:src="@{/image/slideshow_2.jpg}"
+								alt="First slide">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" th:src="@{/image/slideshow_3.jpg}"
+								alt="Second slide">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" th:src="@{/image/slideshow_4.jpg}"
+								alt="Third slide">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" th:src="@{/image/slideshow_4.jpg}"
+								alt="Third slide">
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" th:src="@{/image/slideshow_4.jpg}"
+								alt="Third slide">
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div
+			style="margin: 20px auto; text-align: center; font-size: 30px; font-weight: 700; color: #555555;"
+			class="col-12">SẢN PHẨM HOT</div>
+			
+			
+		<!--slide product-->	
+		<div class="container">
+			<div class="slide-product">
+				<div class="row" style="margin: 0 150px">
+					<div class="MultiCarousel" data-items="1,2,3,5" data-slide="1"
+						id="MultiCarousel" data-interval="1000">
+						<div class="MultiCarousel-inner" style="margin-left: -12px;">
+	
+							<div th:each="element : ${productHot}" th:object="${element}"
+								class="item">
+								<div style="padding: 0 0;" class="pad15 ">
+									<div style="margin-bottom: 10px !important;"
+										class="card card-custom">
+										<span th:text="*{sale}+'%'" class="ico-sale"></span>
+										<div style="overflow: hidden; height: 250px;">
+											<img class="card-img-top link"
+												th:src="@{'/upload/'+*{avatar}}" alt="Card image cap">
+										</div>
+	
+										<!-- <hr class="gach-ngang"> -->
+										<div style="padding: 4px 1px !important;" class="card-body">
+											<a class="card-title product-title text-center"
+												th:href="@{/detail/product/{productSeo}(productSeo=*{seo})}"
+												th:text="*{title}" style="margin-bottom: 0px"></a>
+											<p class="card-text text-center">Mô tả chi tiết sản phẩm</p>
+											<div class="price text-center">
+												<p
+													th:text="${#numbers.formatDecimal(element.price, 0, 'COMMA', 0, 'POINT')} +'đ'"
+													class="card-text old-price"></p>
+												<p
+													th:text="${#numbers.formatDecimal(element.priceSale, 0, 'COMMA', 0, 'POINT')} +'đ'"
+													class="card-text new-price"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+	
+						</div>
+						<button style="background-color: white; color: black"
+							class="btn btn-primary leftLst">
+							<i class="fa-solid fa-chevron-left"></i>
+						</button>
+						<button style="background-color: white; color: black"
+							class="btn btn-primary rightLst">
+							<i class="fa-solid fa-chevron-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+		<div style="margin: 20px auto; text-align: center; font-size: 30px; font-weight: 700; color: #555555;">SẢN PHẨM MỚI</div>
+		<!--NEW PRODUCT-->	
+		<div class="container">		
+			<div class=" find">
+				<div class="row" style="margin: 0 150px">
+					<div th:each="element : ${productLatest}" th:object="${element}"
+						class="col-4 col-sm-6 col-md-4 col-lg-3">
+						<div style="margin-bottom: 10px !important;"
+							class="card card-custom">
+							<span th:text="*{sale}+'%'" class="ico-sale"></span>
+							<div style="overflow: hidden; height: 250px;">
+								<img class="card-img-top link" th:src="@{'/upload/'+*{avatar}}"
+									alt="Card image cap">
+							</div>
+
+							<!-- <hr class="gach-ngang"> -->
+							<div style="padding: 4px 1px !important;" class="card-body">
+								<a class="card-title product-title text-center"
+									th:href="@{/detail/product/{productSeo}(productSeo=*{seo})}"
+									th:text="*{title}" style="margin-bottom: 0px"></a>
+								<p class="card-text text-center">Mô tả chi tiết sản phẩm</p>
+								<div class="price text-center">
+									<p
+										th:text="${#numbers.formatDecimal(element.price, 0, 'COMMA', 0, 'POINT')} +'đ'"
+										class="card-text old-price"></p>
+									<p
+										th:text="${#numbers.formatDecimal(element.priceSale, 0, 'COMMA', 0, 'POINT')} +'đ'"
+										class="card-text new-price"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+		
+		
+		<div style="margin: 20px auto; text-align: center; font-size: 30px; font-weight: 700; color: #555555;">
+				BẠN ĐANG TÌM?</div>
+		
+		
+		<!--WHAT FIND?-->
+		<div class="container">
+				<div class="row" style="margin: 0 150px">
+					<div class="col-4">
+						<div class="card" style="border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/index_banner_1.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<a th:href="@{/category/2}"
+									style="font-weight: 550; color: orange;" class="card-text">GIÀY
+									SÂN CỎ NHÂN TẠO</a>
+								<p class="info-category">Dành cho mặt sân cỏ nhân tạo từ 5-7
+									người</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="card" style="border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/giaycotunhien.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<a th:href="@{/category/1}"
+									style="font-weight: 550; color: orange;" class="card-text">GIÀY
+									SÂN CỎ TỰ NHIÊN</a>
+								<p class="info-category">Dành cho mặt sân có tự nhiên 11
+									người</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="card" style="border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/giayfutsal.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<a th:href="@{/category/1}"
+									style="font-weight: 550; color: orange;" class="card-text">GIÀY
+									SÂN CỎ TỰ NHIÊN</a>
+								<p class="info-category">Giành cho sân xi măng và sân Futsal</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!--TYPE OF PRODUCTS-->
+		<div class="container">
+			<div class=" type-of-product" style="margin: 0 110px;">
+				<div class=" box">
+					<img height="150px !important" src="./image/kid-shoes.jpg"> <span>Giày
+						cho trẻ em</span>
+				</div>
+				<div class=" box">
+					<img height="150px !important" src="./image/uniform.jpg"> <span>Quần
+						áo thể thao</span>
+				</div>
+				<div class=" box">
+					<img height="150px !important" src="./image/ball.jpg"> <span>Phụ
+						kiện thể thao</span>
+				</div>
+
+
+			</div>
+		</div>
+		
+		<div
+				style="margin: 20px auto; text-align: center; font-size: 30px; font-weight: 700; color: #555555;">
+				BẠN CHƠI Ở VỊ TRÍ NÀO?</div>
+		<!--BY POSITION-->
+		<div class="container">
+			<div class="row  find" style="margin: 0 150px 80px 150px;">
+					<div class="col-4">
+						<div class="card mx-auto"
+							style="width: 18rem; border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/position_banner_1.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<p style="font-weight: 550; color: orange;" class="card-text">HẬU
+									VỆ</p>
+								<p class="info-category">Phòng ngự chắc chắn</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="card mx-auto"
+							style="width: 18rem; border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/position_banner_2.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<p style="font-weight: 550; color: orange;" class="card-text">TIỀN
+									VỆ</p>
+								<p class="info-category">Kiểm soát, chuyền bóng</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="card mx-auto"
+							style="width: 18rem; border: none; background-color: #333333;">
+							<figure>
+								<img class="card-img-top " id="zoomIn"
+									src="./image/position_banner_3.jpg" alt="Card image cap">
+							</figure>
+							<div class="card-body p-1 color-card-body">
+								<p style="font-weight: 550; color: orange;" class="card-text">TIỀN
+									ĐẠO</p>
+								<p class="info-category">Tốc độ đột phá</p>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+		
+		</div>
+		
+		<!-- Footer -->
+		<footer th:replace="html/CustomerView/footer::footer"></footer>
+		<!-- Footer -->	
+	<!-- END  -->
+	</div>
+
+		
+		
+
+	 <script th:replace="html/Common/commonJS::common-js"></script>
+
+	<script th:src="@{/js/script.js}"></script>
+	<script th:src="@{/js/owl.carousel.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--head-->
+<head th:replace="html/CustomerView/header::head"></head>
+
+<body>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+			var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+			s1.async=true;
+			s1.src='https://embed.tawk.to/65ea79e29131ed19d976a6c4/1hoduo7vd';
+			s1.charset='UTF-8';
+			s1.setAttribute('crossorigin','*');
+			s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script>
+    <!--End of Tawk.to Script-->
+    <div class="container-fluid">
+        <!--HEADER-->
+        <div style="width: 105% !important" class="row header">
+            <div th:replace="html/CustomerView/header::header-temp"></div>
+        </div>
+    </div>
+    <div style="max-width: 1350px;" class="container">
+        <div class="row col-12" style="padding-left: 0px;">
+            <div class="col-3 justify-content-start" style="padding-left: 0px;">
+                <div style="background-color: #333333 !important;" class="list-group list-group list-group-flush">
+                    <a style="background-color: #333333 !important; color: orange !important" th:href="@{/allproduct}" class="list-group-item list-group-item-action list-category-item">Danh mục sản phẩm</a>
+                    <a th:each="category:${categories}" th:href="@{/category/{categoryId}(categoryId=${category.id})}" th:text="${category.name}" class="list-group-item list-group-item-action name-category-item"></a>
+                </div>
+            </div>
+
+            <div class="col-9 content">
+                <div class="row">
+                    <img src="./image/banner-collection.jpg" alt="">
+                </div>
+                <div style="color: white;" class="text-all-product">
+                    TẤT CẢ SẢN PHẨM
+                </div>
+                <div class=" category-icon">
+                    <i class="fa fa-th-large"></i>
+                </div>
+                <div style="right: 0; color: white;" class=" float-right justify-content-end">
+                    Sắp xếp theo
+                    <select style="border-radius: 3px;" name="filter" id="">
+            <option value="">Giá tăng dần</option>
+            <option value="">Giá giảm dần</option>
+            <option value="">Tên: A-Z</option>
+            <option value="">Tên: Z-A</option>
+          </select>
+                </div>
+                <hr>
+                <!-- danh sach sp -->
+                <div class="row list-product">
+                    <div th:each="product : ${list}" th:object="${product}" class="col-lg-3 col-md-4 col-sm-6  ">
+                        <div style="margin-bottom: 10px !important;" class="card card-custom">
+                            <span th:text="'-' + *{sale} + '%'" class="ico-sale"></span>
+                            <img class="card-img-top link" th:src="@{'/upload/'+*{avatar}}" alt="Card image cap">
+                            <div style="padding: 6px !important;" class="card-body">
+                                <a th:text="*{title}" class="card-title product-title" th:href="@{/detail/product/{productSeo}(productSeo=*{seo})}">
+
+                                </a>
+                                <div class="price">
+                                    <span th:text="*{#numbers.formatDecimal(price, 0, 'COMMA', 0, 'POINT')} +'đ'" class="card-text old-price"></span>
+                                    <span th:text="*{#numbers.formatDecimal(priceSale, 0, 'COMMA', 0, 'POINT')}+'đ'" class="card-text new-price"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- Paging -->
+                <nav  aria-label="Page navigation example">
+                    <ul style="justify-content: center;" class="pagination">
+                        <li class="page-item">
+                            <th:block th:if="${currentPage == 1}">
+                                <a class="page-link disabled" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </th:block>
+                            <th:block th:if="${currentPage != 1}">
+                                <a class="page-link" th:href="@{/allproduct(pageIndex=${currentPage-1})}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </th:block>
+                        </li>
+                        <li class="page-item" th:each="index:${#numbers.sequence(1,list.totalPages)}">
+                            <a style="color: orange" class="page-link" th:href="@{/allproduct(pageIndex=${index})}" th:text="${index}"></a>
+                        </li>
+                        <li class="page-item">
+                            <th:block th:if="${currentPage == list.totalPages}">
+                                <a class="page-link disabled" aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </th:block>
+                            <th:block th:if="${currentPage != list.totalPages}">
+                                <a class="page-link" th:href="@{/allproduct(pageIndex=${currentPage+1})}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </th:block>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="html/CustomerView/footer::footer"></footer>
+    <!-- Footer -->
+
+    <script th:replace="html/Common/commonJS::common-js"></script>
+    <script src="./script.js"></script>
+    <script src="./OwlCarousel2-2.3.4/src/js/owl.carousel.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="html/AdminView/common/head::head"></head>
+
+<body>
+<!--    header-->
+
+<!--    nav-->
+
+    <div class="container-fluid">
+        <div class="row">
+			<div th:replace="html/AdminView/common/nav :: nav"></div>
+            <main class="col-9">
+                <form th:object="${category}"  method="post" action="/admin/category/edit" class="form-horizontal">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend>DANH MỤC</legend>
+                        <!-- Text input-->
+                        <input hidden th:field="*{id}" />
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="name">TÊN DANH MỤC</label>
+                            <div style="width: 93.333333% !important" class="col-md-4">
+                                <input th:field="*{name}" path="name" id="name" name="category_name" placeholder="CATEGORY NAME" class="form-control input-md" type="text" />
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function() {
+                                $("#summernote").summernote();
+                            });
+                        </script>
+                        <!-- Button -->
+                        <br>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <button id="singlebutton" class="btn btn-primary" type="submit">
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </main>
+        </div>
+    </div>
+	<script th:replace="html/Common/commonJS-Admin::JS"></script>
+</body>
+
+</html>

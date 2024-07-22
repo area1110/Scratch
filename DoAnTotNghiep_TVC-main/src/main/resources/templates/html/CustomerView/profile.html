@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--head-->
+<!--<head th:replace="html/CustomerView/common::head"></head>-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>WuMing Shop</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet" />
+   <link th:href="@{/css/style.css}" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="" th:replace="html/Common/commonJS::common-css">
+</head>
+<body>
+<script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+			var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+			s1.async=true;
+			s1.src='https://embed.tawk.to/65ea79e29131ed19d976a6c4/1hoduo7vd';
+			s1.charset='UTF-8';
+			s1.setAttribute('crossorigin','*');
+			s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script>
+
+    <div  class="container-fluid">
+        <div style="width: 105% !important" class="row header">
+             <div th:replace="html/CustomerView/header::header-temp"></div>
+        </div>
+     </div>
+
+        
+   
+         <!--CONTACT-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Thông tin của bạn</h2>
+    <div class="container">
+
+        <div  class="col-12">
+            <form action="/profile" method="post" th:object="${user}" class="card mb-3">
+              <div class="card-body">
+                <div class="row col-8 mt-4">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Họ tên</h6>
+                  </div>
+                  <div style="text-align: center"  class="col-sm-9 text-secondary info">
+                   <input th:field="*{customerName}" type="tel" class="form-control" id="customerFullName" name="customerFullName" value="${userLogined.customerName }" />
+                  </div>
+                </div>
+   
+                <div class="row col-8 mt-4">
+                  <div class="col-sm-3">
+                    <h6  class="mb-0">Email</h6>
+                  </div>
+                  <div style="text-align: center" class="col-sm-9 text-secondary info">
+                  <input th:field="*{email}" name="email" type="tel" class="form-control"  value="${userLogined.email }" />
+                    
+                  </div>
+                </div>
+
+                <div class="row col-8 mt-4">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Điện thoại</h6>
+                  </div>
+                  <div style="text-align: center" class="col-sm-9 text-secondary info">
+                  <input th:field="*{phone}" name="phone" type="tel" class="form-control"   value=" ${userLogined.phone }" />
+
+                  </div>
+                </div>
+           
+             
+             
+                <div class="row col-8 mt-4">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Địa chỉ</h6>
+                  </div>
+                  <div style="text-align: center" class="col-sm-9 text-secondary info">
+                      <input th:field="*{address}" name="address" type="tel" class="form-control"  value=" ${userLogined.address }" />
+                  </div>
+                </div>
+              
+                <div class="row mt-4">
+                  <div class="col-sm-12">
+                     <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Cập nhật</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+    </div>
+   
+
+    <!--END-Position-->
+         <!-- Footer -->
+   		 <footer th:replace="html/CustomerView/footer::footer"></footer>
+    <!-- Footer -->
+</div>
+    
+    
+  
+</body>
+
+<script th:replace="html/Common/commonJS::common-js"></script>
+ <script th:src="@{/js/script.js}"></script>
+ <script th:src="@{/js/owl.carousel.js}"></script>
+</html>

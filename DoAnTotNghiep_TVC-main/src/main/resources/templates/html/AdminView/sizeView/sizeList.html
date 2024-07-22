@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--    header-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="html/AdminView/common/head::head"></head>
+
+<style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+<body>
+
+    <!-- HEADER -->
+    <!--    header-->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <!-- NAVIGATION -->
+            <div th:replace="html/AdminView/common/nav :: nav"></div>
+            <main class="col-9">
+
+                <div class="container-fluid">
+                    <form class="form-inline" action="" method="get">
+                        <div class="d-flex flex-row justify-content-between mt-4">
+                            <div class="d-flex flex-row">
+                                <input type="hidden" id="page" name="page" class="form-control">
+                                <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Search" value="" style="margin-right: 5px;">
+                                <button type="submit" id="btnSearch" name="btnSearch" value="Search" class="btn btn-primary">Seach</button>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline-primary mb-1" href="/admin/size/add" role="button">Add
+                  New</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tên Size</th>
+                                    <th scope="col">Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  th:each="size : ${list}" th:object="${size}">
+                                    <th th:text="*{id}" scope="row">
+
+                                    </th>
+                                    <td th:text="*{name}">
+
+                                    </td >
+                                    <td>
+                                        <a class="btn btn-primary" th:href="@{/admin/size/edit/{id}(id=*{id})}" role="button">Edit</a>
+                                        <a class="btn btn-danger" th:href="@{/admin/size/delete/{id}(id=*{id})}" onclick="return confirm('Bạn có muốn xóa ?')" role="button">Delete</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <!-- Paging -->
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div id="paging"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+
+    </div>
+
+    <script th:replace="html/Common/commonJS-Admin::JS"></script>
+</body>
+
+</html>

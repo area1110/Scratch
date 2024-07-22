@@ -1,0 +1,16 @@
+{
+	"name": "John",
+	"details": {
+		"address": "123 Main St",
+		"phones": [
+			{
+				"type": "home",
+				"number": "123-456-7890"
+			},
+			{
+				"type": "work",
+				"number": "987-654-3210"
+			}
+		]
+	}
+}
