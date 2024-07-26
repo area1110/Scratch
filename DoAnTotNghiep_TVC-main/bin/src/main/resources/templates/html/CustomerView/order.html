@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+	<title>Trang chủ</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WuMing Shop</title>
+	<link rel="stylesheet" type="text/css" href="" th:replace="html/Common/commonJS::common-css">
+	<link th:href="@{/css/header.css}" rel="stylesheet" />
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+	<link rel="stylesheet" th:href="@{/css/cart.css}" >
+</head>
+<body>
+<script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+			var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+			s1.async=true;
+			s1.src='https://embed.tawk.to/65ea79e29131ed19d976a6c4/1hoduo7vd';
+			s1.charset='UTF-8';
+			s1.setAttribute('crossorigin','*');
+			s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script>
+	<!-- Common -->
+	<div class="row header" style="margin-left: 0px !important;width: 105% !important">
+		 <div th:replace="html/CustomerView/header::header-temp"></div>
+	</div>
+
+
+	<div style="max-width: 1920px; margin-top: 200px;" class="container">
+	<form action="/cart/checkout" method="post">
+		<section class="h-100" style="background-color: #eee;">
+			<div class="container h-100 py-5">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div class="col-10">
+
+						<div class="d-flex justify-content-between align-items-center mb-4">
+							<h3 class="fw-normal mb-0 text-black">Đơn hàng của bạn</h3>
+						</div>
+
+						<div th:each="order : ${orderList}" class="card rounded-3 mb-4">
+							<div class="card-body p-4">
+								<div class="row d-flex justify-content-between align-items-center">
+
+									<div class="col-md-3 col-lg-3 col-xl-3">
+										<a class="lead fw-normal mb-2" th:href="@{/order/{Id}(Id=${order.id})}" th:text="${order.code}"></a>
+									</div>
+									<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+										<b class="lead fw-normal mb-2" href="#" th:text="${order.createdDate}"></b>
+									</div>
+									<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+										<h5 class="mb-0" th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT')} +'đ'"></h5>
+									</div>
+									<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+										<h6  th:if="${order.statusOrder}==0" class="mb-0 text-primary" th:text="'Đang xử lý...'"></h6>
+										<h6  th:if="${order.statusOrder}==1" class="mb-0 text-warning" th:text="'Đang giao hàng'"></h6>
+										<h6  th:if="${order.statusOrder}==2" class="mb-0 text-success" th:text="'Đã giao hàng'"></h6>
+										<h6  th:if="${order.statusOrder}==3" class="mb-0 text-secondary" th:text="'Đã hủy'"></h6>
+									</div>
+									<div class="col-md-3 col-lg-3 col-xl-3 text-end">
+										<a th:if="${order.statusOrder}==0" th:href="@{/order/{id}/{statusOrder}(id=*{order.id},statusOrder=3)}"  th:text="'Hủy đơn hàng'" class="text-danger"></i></a>
+										<p th:if="${order.statusOrder}!=0" class="text-danger" th:text="'Đơn hàng không thể hủy vì đang được giao hoặc đã hủy.'"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+
+		<!-- Footer -->
+  		  <footer th:replace="html/CustomerView/footer::footer"></footer>
+    	<!-- Footer -->
+
+	</div>
+
+
+</body>
+
+<jsp:include page="/WEB-INF/view/khachhang/layout/js.jsp"></jsp:include>
+
+<script type="text/javascript">
+	/* $("#plus").on("click", function(e){
+		var soluong = $(this).parent().find('#quanlity').val();
+		soluong = parseInt(soluong) + 1;
+		if(soluong >= 1)
+			{
+				$(this).parent().find('#quanlity').html('#quanlity').val(soluong);
+			}
+	}) */
+	
+	
+</script>
+
+<script th:replace="html/Common/commonJS::common-js"></script>
+<script th:src="@{/js/customer_scripts.js}"> </script>
+
+
+</html>

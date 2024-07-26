@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <link rel="icon" href="https://scontent.fhan12-1.fna.fbcdn.net/v/t1.15752-9/279445565_694193391694213_6446717224005684343_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=zLbTQsQ0hhMAX_EKhhA&_nc_ht=scontent.fhan12-1.fna&oh=03_AVJtqq2jwhow2E7W4zv8HL4YdA4G8Kvb7e1BesOnJ09-gQ&oe=62AEFA3A"
+          type="image/icon type">
+    <title>WuMing Shop</title>
+    <link th:href="@{/css/nav.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.1/dashboard.css" />
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/5.1/dashboard.rtl.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+   <!--  <link th:href="@{/css/dashboard.css}" rel="stylesheet" /> -->
+</head>
+<body>
+<div class="page-wrapper chiller-theme toggled col-3" th:fragment="nav">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper" >
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="#">WuMing Shop</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+     
+      
+      <div class="sidebar-menu">
+        <ul>      
+         <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Đơn Hàng</span>
+              <span class="badge badge-pill badge-danger">3</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="/admin/saleOrderList">Danh sách đơn hàng
+                  </a>
+                </li>              
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="far fa-gem"></i>
+              <span>Sản Phẩm</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="/admin/product/add">Thêm sản phẩm</a>
+                </li>
+                <li>
+                  <a href="/admin/product/list">Danh sách sản phẩm</a>
+                </li>
+               
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-chart-line"></i>
+              <span>Danh Mục</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a  href="/admin/category/add">Thêm danh mục</a>
+                </li>
+                <li>
+                  <a  href="/admin/category/list">Danh sách danh mục</a>
+                </li>             
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-globe"></i>
+              <span>Size</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="/admin/size/list">Danh sách size</a>
+                </li>
+                <li>
+                  <a href="/admin/size/add">Thêm Size</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-globe"></i>
+              <span>Khách  Hàng</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="/admin/userList">Danh sách khách hàng</a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+          
+          
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      <a href="#">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-pill badge-warning notification">3</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-cog"></i>
+        <span class="badge-sonar"></span>
+      </a>
+      <a href="/logout">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </div>
+  </nav>
+  <!-- sidebar-wrapper  -->
+  <!-- page-content" -->
+</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+	<script>
+		jQuery(function($) {
+
+			$(".sidebar-dropdown > a").click(function() {
+				$(".sidebar-submenu").slideUp(200);
+				if ($(this).parent().hasClass("active")) {
+					$(".sidebar-dropdown").removeClass("active");
+					$(this).parent().removeClass("active");
+				} else {
+					$(".sidebar-dropdown").removeClass("active");
+					$(this).next(".sidebar-submenu").slideDown(200);
+					$(this).parent().addClass("active");
+				}
+			});
+
+			$("#close-sidebar").click(function() {
+				$(".page-wrapper").removeClass("toggled");
+			});
+			$("#show-sidebar").click(function() {
+				$(".page-wrapper").addClass("toggled");
+			});
+
+		});
+	</script>
+</body>
+</html>

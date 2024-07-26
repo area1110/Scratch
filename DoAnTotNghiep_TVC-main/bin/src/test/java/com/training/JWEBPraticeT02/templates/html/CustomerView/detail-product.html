@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" th:href="@{/image/Free_Sample_By_Wix__1_-removebg-preview.png}" type="image/icon type">
+    <title>WuMing Shop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        .cus_tag {
+            text-align: left !important;
+        }
+
+        
+
+        textarea {
+            display: block;
+            width: 100% !important;
+            margin-bottom: 2px !important;
+        }
+        /*post*/
+
+        .post {
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        /*comments*/
+
+        .comments-section {
+            margin-top: 100px;
+            border: 1px solid #ccc;
+            /* background-color: white; */
+            color: white;
+            border: none;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+        }
+
+        .comment .comment-name {
+            font-weight: bold;
+        }
+
+        .comment .comment-date {
+            font-style: italic;
+            font-size: 0.8em;
+        }
+
+        .comment .reply-btn,
+        .edit-btn {
+            font-size: 0.8em;
+        }
+
+        .comment-details {
+            width: 91.5%;
+            float: left;
+        }
+
+        .comment-details p {
+            margin-bottom: 0px;
+        }
+
+        .comment .profile_pic {
+            width: 35px;
+            height: 35px;
+            margin-right: 5px;
+            float: left;
+            border-radius: 50%;
+        }
+        /*replies*/
+
+        .reply {
+            margin-left: 30px;
+        }
+
+        .reply_form {
+            margin-left: 40px;
+            display: none;
+        }
+
+        #comment_form {
+            margin-top: 10px;
+        }
+
+        #submit_comment {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Start of Tawk.to Script-->
+    <script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+			var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+			s1.async=true;
+			s1.src='https://embed.tawk.to/65ea79e29131ed19d976a6c4/1hoduo7vd';
+			s1.charset='UTF-8';
+			s1.setAttribute('crossorigin','*');
+			s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script>
+    <!--End of Tawk.to Script -->
+
+
+    <div class="container-fluid">
+        <!--HEADER-->
+	    <div style="width: 105% !important"  class="row header">
+	        <div th:replace="html/CustomerView/common::header1"></div>
+	        <div th:replace="html/CustomerView/common::header2"></div>
+	        <div th:replace="html/CustomerView/common::nav"></div>
+	    </div>  
+	</div>
+    <div style="margin-top: 200px;" class="container">
+        <div th:object="${product}" class="row">
+            <div class="col-4">
+                <img width="350px" heigh="350px" th:src="@{'/upload/'+*{avatar}}" alt="">
+            </div>
+
+            <div class="col-8">
+                <p th:text="*{title}" class="name-product">
+
+                </p>
+
+                <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +'đ'" class="card-text old-price"> </span>
+
+
+                <span th:text="${#numbers.formatDecimal(product.priceSale, 0, 'COMMA', 0, 'POINT')} +'đ'" style="margin-left: 20px; font-size: 30px" class="card-text new-price">
+                </span>
+                <p  style="font-size: 18px; color: #fff;margin-bottom:0;font-weight: 600;">Mô tả:</p>
+                <p th:text="*{detailDescription}" class="product-desc">
+                </p>
+                <p class="name-provider">Chọn size</p>
+                <!-- size button -->
+                <div class=" shoe size">
+
+                    <div th:each="size : ${sizes}" th:object="${size}" class="btn-group " role="group" aria-label="Third group">
+                        <button th:value="*{id}" th:text="*{name}" type="button" class="btn btn-info shoe-size-btn size-button" onclick="getSizeValue(this)" name="size"> </button>
+                    </div>
+
+                    <!-- end size button -->
+                    <div style="margin-top: 15px;">
+                        <button type="button" class="btn btn-outline-warning">
+                            <a class="add-product" th:attr="data-id=${product.id}" th:text="'Thêm vào giỏ hàng'" th:onclick="'javascript:AddToCart(\'' + @{/ajax/addToCart} + '\', ' + ${product.id} + ', \'' + 1 + '\', 1)'"></a>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!--END-Position-->
+            </div>
+      
+        </div>
+    
+    <!-- Footer -->
+   		 <footer th:replace="html/CustomerView/footer::footer"></footer>
+    <!-- Footer -->
+     </div>
+     
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+     <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/customer_scripts.js}"> </script>
+    <script th:src="@{/js/detail.js}"> </script>
+</body>
+
+</html>

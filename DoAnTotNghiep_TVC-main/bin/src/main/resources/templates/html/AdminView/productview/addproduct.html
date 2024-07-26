@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="html/AdminView/common/head::head"></head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<!-- NAVIGATION -->
+			<div th:replace="html/AdminView/common/nav::nav"></div>
+			<main class="col-9">
+				<form th:object="${product}" method="post"
+					action="/admin/product/add" class="form-horizontal"
+					enctype="multipart/form-data">
+					<fieldset>
+
+						<!-- Form Name -->
+						<legend>SẢN PHẨM</legend>
+						<div class="form-group">
+							<input hidden th:field="*{id}" value="" />
+						</div>
+						<div style="width: 100%" class="form-group ">
+							<label class=" control-label font-weight-bold" for="category">DANH MỤC
+								(required)</label>
+
+
+							<div >
+								<select th:field="*{category}" class="form-control"
+									id="category">
+									<option th:each="element : ${categories}"
+										th:value="${element.id}" th:text="${element.name}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label font-weight-bold" for="title">TÊN SẢN PHẨM</label>
+							<div >
+								<input required th:field="*{title}" id="title"
+									placeholder="Product name" class="form-control input-md"
+									type="text" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class=" control-label">MÔ TẢ SẢN PHẨM</label>
+							<div style="width: 93.333333% !important;" class=" text-des">
+								<textarea th:field="*{detailDescription}" class="form-control"
+									id="summernote" name="prd_description"></textarea>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class=" control-label font-weight-bold">GIÁ</label>
+							<div >
+								<input required th:field="*{price}" name="prd_price"
+									placeholder="Price" class="form-control input-md" type="text" />
+							</div>
+						</div>
+
+						<!-- sửa sau -->
+						<div class="form-group">
+							<label class=" control-label font-weight-bold text-uppercase">Ảnh sản phẩm</label>
+							<div >
+								<input id="avatarfile" name="avatarfile" class="input-file"
+									type="file" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class=" control-label font-weight-bold text-uppercase" for="productImage">Ảnh bổ
+								sung</label>
+							<div >
+								<input id="productImage" name="productImage" class="input-file"
+									type="file" multiple="multiple" />
+							</div>
+						</div>
+
+						<!-- Sale-->
+						<div class="form-group">
+							<label class=" control-label font-weight-bold">SALE</label>
+							<div >
+								<input required th:field="*{sale}" placeholder="%"
+									class="form-control input-md" type="number" />
+							</div>
+						</div>
+						<!-- Size sản phẩm -->
+						<div class="form-group d-flex">
+							<label class=" control-labe font-weight-bold">SIZE</label>
+
+							<div th:each="prdSize,stat :${productSize}"
+								class="form-group row ml-5">
+								<label th:text="${prdSize.size.name}"
+									class="col-sm-4 col-form-label"></label>
+								<div class="d-flex">
+									<input hidden th:field="*{productSize[__${stat.index}__].id}">
+									<input hidden
+										th:field="*{productSize[__${stat.index}__].product}">
+									<input hidden th:field="*{productSize[__${stat.index}__].size}">
+									<input th:field="*{productSize[__${stat.index}__].quantity}"
+										class=" input-md" type="text" min="0" style="width: 30%; text-align: center; " />
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+						<!-- Sản phẩm có HOT không -->
+						<div class="form-group">
+							<input th:field="*{hot}" class="mr-2" type="checkbox" />
+							<label class=" control-label font-weight-bold text-uppercase">Is Hot??</label>
+							
+						
+						</div>
+						<br>
+						<div class="form-group">
+							<div class="">
+								<button id="singlebutton" name="add" class="btn btn-primary">
+									Lưu</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</main>
+		</div>
+	</div>
+
+	<script th:replace="html/Common/commonJS-Admin::JS"></script>
+</body>
+
+</html>
